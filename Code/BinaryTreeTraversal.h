@@ -21,19 +21,14 @@ class BinaryTreeTraversal {
 public:
     vector<int> inorderTraversal(TreeNode *root) {
         vector<int> inorder;
-        if (root == nullptr) {
-            return inorder;
-        } else if (root->left == nullptr && root->right == nullptr) {
-            inorder.push_back(root->val);
-            return inorder;
-        } else {
+        if(root != nullptr){
             vector<int> l = inorderTraversal(root->left);
             vector<int> r = inorderTraversal(root->right);
             inorder.insert(inorder.end(), l.begin(), l.end());
             inorder.push_back(root->val);
             inorder.insert(inorder.end(), r.begin(), r.end());
-            return inorder;
         }
+        return inorder;
     }
 
 };
