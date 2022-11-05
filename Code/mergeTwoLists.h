@@ -19,48 +19,43 @@ struct ListNode {
 class mergeTwoLists {
 public:
     ListNode *mergeTwoListsFunc(ListNode *list1, ListNode *list2) {
-        ListNode *merged = nullptr;
-        ListNode *head = nullptr;
+        if (list1 == nullptr) {
+            return list2;
+        } else if (list2 == nullptr) {
+            return list1;
+        }
+        ListNode *merged = nullptr, *head = nullptr;
         while (list1 != nullptr && list2 != nullptr) {
-            ListNode *a = new ListNode();
-            a->next = nullptr;
+            int a;
             if (list1->val < list2->val) {
-                a->val = list1->val;
+                a = list1->val;
                 list1 = list1->next;
             } else {
-                a->val = list2->val;
+                a = list2->val;
                 list2 = list2->next;
             }
+            ListNode *b = new ListNode(a);
             if (head == nullptr) {
-                head = a;
-                merged = a;
+                head = b;
+                merged = b;
                 continue;
             }
-            merged->next = a;
+            merged->next = b;
             merged = merged->next;
         }
 
-        if(list1 != nullptr) {
-            if (head == nullptr) {
-                merged = list1;
-                head = merged;
-            } else {
-                merged->next = list1;
-            }
+        if (list1) {
+            merged->next = list1;
         }
 
-        if(list2 != nullptr) {
-            if (head == nullptr) {
-                merged = list2;
-                head = merged;
-            } else {
-                merged->next = list2;
-            }
+        if (list2) {
+            merged->next = list2;
         }
 
         return head;
 
     }
+
 };
 
 #endif //DAILYDSA_MERGETWOLISTS_H
