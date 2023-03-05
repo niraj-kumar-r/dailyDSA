@@ -1,5 +1,8 @@
-*.exe
+*
+!*.*
+!*/
 ./Code/*.exe
+*.exe
 .vscode
 .idea
 cmake-build-debug
