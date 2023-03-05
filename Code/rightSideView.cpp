@@ -18,16 +18,20 @@ class Solution
 public:
     vector<int> rightSideView(TreeNode *root)
     {
-        vector<int> a, b, c;
+        vector<int> a = {}, b = {}, c = {};
         if (!root)
         {
             return a;
         }
         a.push_back(root->val);
+        if (root->left == nullptr && root->right == nullptr)
+        {
+            return a;
+        }
         b = rightSideView(root->left);
         c = rightSideView(root->right);
         a.insert(a.end(), c.begin(), c.end());
-        int d = c.size() - b.size();
+        int d = b.size() - c.size();
         if (d > 0)
         {
             a.insert(a.end(), b.begin() + (b.size() - d), b.end());
