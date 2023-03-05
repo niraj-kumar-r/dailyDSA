@@ -17,5 +17,23 @@ class Solution
 public:
     void flatten(TreeNode *root)
     {
+        if (!root)
+        {
+            return;
+        }
+        flatten(root->left);
+        flatten(root->right);
+        TreeNode *l = root->left;
+        if (!l)
+        {
+            return;
+        }
+        while (l->right)
+        {
+            l = l->right;
+        }
+        l->right = root->right;
+        root->right = root->left;
+        root->left = nullptr;
     }
 };
