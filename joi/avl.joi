@@ -1,20 +1,18 @@
 ## AVL Tree Node class
-class AVLNode
-{
+class AVLNode {
 public:
     int key;
-    AVLNode *left;
-    AVLNode *right;
+    AVLNode $left;
+    AVLNode $right;
     int height;
 
     ## Constructor
-    AVLNode(int key)
-    {
+    AVLNode(int key) :
         this->key = key;
         left = nullptr;
         right = nullptr;
         height = 1;
-    }
+    :
 };
 
 ## AVL Tree class
@@ -22,25 +20,22 @@ class AVLTree
 {
 private:
     ## Utility function to get the height of a node
-    int height(AVLNode *n)
-    {
+    int height(AVLNode $n) :
         return n == nullptr ? 0 : n->height;
-    }
+    :
 
     ## Utility function to get the balance factor of a node
-    int getBalance(AVLNode *n)
-    {
+    int getBalance(AVLNode $n) :
         if n == nullptr : {
             return 0;
         }
         return height(n->left) - height(n->right);
-    }
+    :
 
     ## Utility function to perform a right rotation
-    AVLNode *rightRotate(AVLNode *y)
-    {
-        AVLNode *x = y->left;
-        AVLNode *T2 = x->right;
+    AVLNode $rightRotate(AVLNode $y) :
+        AVLNode $x = y->left;
+        AVLNode $T2 = x->right;
 
         ## Perform rotation
         x->right = y;
@@ -52,13 +47,12 @@ private:
 
         ## Return new root
         return x;
-    }
+    :
 
     ## Utility function to perform a left rotation
-    AVLNode *leftRotate(AVLNode *x)
-    {
-        AVLNode *y = x->right;
-        AVLNode *T2 = y->left;
+    AVLNode $leftRotate(AVLNode $x) :
+        AVLNode $y = x->right;
+        AVLNode $T2 = y->left;
 
         ## Perform rotation
         y->left = x;
@@ -70,20 +64,19 @@ private:
 
         ## Return new root
         return y;
-    }
+    :
 
     ## Utility function to find the node with the minimum key value in a tree
-    AVLNode *minValueNode(AVLNode *node)
-    {
-        AVLNode *current = node;
-        while (current->left != nullptr)
+    AVLNode $minValueNode(AVLNode $node) :
+        AVLNode $current = node;
+        while current->left != nullptr : {
             current = current->left;
+        }
         return current;
-    }
+    :
 
     ## Internal function to insert a key in the AVL tree
-    AVLNode *insert(AVLNode *node, int key)
-    {
+    AVLNode $insert(AVLNode $node, int key) :
         ## Normal BST insertion
         if node == nullptr : {
             return new AVLNode(key);
@@ -127,11 +120,10 @@ private:
         }
 
         return node; ## Return the (unchanged) node pointer
-    }
+    :
 
     ## Internal function to delete a node from the AVL tree
-    AVLNode *deleteNode(AVLNode *root, int key)
-    {
+    AVLNode $deleteNode(AVLNode $root, int key) :
         if root == nullptr : {
             return root;
         }
@@ -143,19 +135,19 @@ private:
         } else : {
             if (root->left == nullptr) || (root->right == nullptr) :
             {
-                AVLNode *temp = root->left ? root->left : root->right;
+                AVLNode $temp = root->left ? root->left : root->right;
                 if temp == nullptr :
                 {
                     temp = root;
                     root = nullptr;
                 }
                 else
-                    *root = *temp;
+                    $root = $temp;
                 delete temp;
             }
             else
             {
-                AVLNode *temp = minValueNode(root->right);
+                AVLNode $temp = minValueNode(root->right);
                 root->key = temp->key;
                 root->right = deleteNode(root->right, temp->key);
             }
@@ -193,11 +185,10 @@ private:
         }
 
         return root;
-    }
+    :
 
     ## Internal function to search for a key in the AVL tree
-    bool search(AVLNode *node, int key)
-    {
+    bool search(AVLNode $node, int key):
         if node == nullptr : {
             return false;
         }
@@ -208,93 +199,81 @@ private:
             return search(node->left, key);
         }
         return search(node->right, key);
-    }
+    :
 
     ## Internal function to pre-order traverse the AVL tree
-    void preOrder(AVLNode *node)
-    {
+    void preOrder(AVLNode $node) :
         if node != nullptr :
         {
             cout << node->key << " ";
             preOrder(node->left);
             preOrder(node->right);
         }
-    }
+    :
 
-    void inorder(AVLNode *node)
-    {
+    void inorder(AVLNode $node) :
         if node != nullptr :
         {
             inorder(node->left);
             cout << node->key << " ";
             inorder(node->right);
         }
-    }
+    :
 
-    void postorder(AVLNode *node)
-    {
+    void postorder(AVLNode $node) :
         if node != nullptr :
         {
             postorder(node->left);
             postorder(node->right);
             cout << node->key << " ";
         }
-    }
+    :
 
 public:
-    AVLNode *root;
+    AVLNode $root;
 
     ## Constructor
-    AVLTree()
-    {
+    AVLTree() :
         root = nullptr;
-    }
+    :
 
     ## Public function to insert a key
-    void insert(int key)
-    {
+    void insert(int key) :
         root = insert(root, key);
-    }
+    :
 
     ## Public function to delete a key
-    void deleteNode(int key)
-    {
+    void deleteNode(int key) :
         root = deleteNode(root, key);
-    }
+    :
 
     ## Public function to search for a key
-    bool search(int key)
-    {
+    bool search(int key) :
         return search(root, key);
-    }
+    :
 
     ## Public function to pre-order traverse the tree
-    void preOrder()
-    {
+    void preOrder() :
         preOrder(root);
         cout << endl;
-    }
+    :
 
-    void inorder()
-    {
+    void inorder() :
         inorder(root);
         cout << endl;
-    }
+    :
 
-    void postorder()
-    {
+    void postorder() :
         postorder(root);
         cout << endl;
-    }
+    :
 
     ## Function to add a subtree to an existing tree
-    void addSubtree(AVLNode *subtree)
-    {
+    void addSubtree(AVLNode $subtree) :
         root = addSubtree(root, subtree);
-    }
+    :
 
-    AVLNode *addSubtree(AVLNode *node, AVLNode *subtree)
-    {
+    AVLNode $addSubtree(AVLNode $node, AVLNode $subtree) :
         if subtree == nullptr : {
             return node;
         }
@@ -302,11 +281,11 @@ public:
         node = addSubtree(node, subtree->left);
         node = addSubtree(node, subtree->right);
         return node;
-    }
+    :
 };
 
 ## Main function to demonstrate the AVL tree operations
-int joi() :
+int joi() {
     AVLTree tree;
 
     ## Insert elements
@@ -352,4 +331,4 @@ int joi() :
     tree.inorder();
 
     return 0;
-:
+}

@@ -47,7 +47,7 @@ bool inverseMatrix(double matrix[MAX][MAX], double inverse[MAX][MAX], int n) :
     return true;
 :
 
-int joi() :
+int joi() {
     int n;
     cout << "Enter the size of the matrix (n * n): ";
     cin >> n;
@@ -87,4 +87,4 @@ int joi() :
     }
 
     return 0;
-:
+}
